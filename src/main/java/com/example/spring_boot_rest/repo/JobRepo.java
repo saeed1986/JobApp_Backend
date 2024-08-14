@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class JobRepo {
 
-    // arrayList to store store JobPost objects
+    // arrayList to store JobPost objects
     List<JobPost> jobs = new ArrayList<>();
 
     // ****************************************************************************
@@ -122,5 +122,34 @@ public class JobRepo {
     // method to save a job post object into arrayList
     public void addJob(JobPost job) {
         jobs.add(job);
+    }
+
+    public JobPost getJob(int postId) {
+        for(JobPost job : jobs) {
+            if(job.getPostId() == postId) {
+                return job;
+            }
+        }
+        return null;
+    }
+
+    public void updateJob(JobPost jobPosts) {
+        for(JobPost jobPost1 : jobs){
+            if(jobPost1.getPostId() == jobPosts.getPostId()){
+                jobPost1.setPostProfile(jobPosts.getPostProfile());
+                jobPost1.setPostDesc(jobPosts.getPostDesc());
+                jobPost1.setReqExperience(jobPosts.getReqExperience());
+                jobPost1.setPostTechStack(jobPosts.getPostTechStack());
+            }
+        }
+    }
+
+    public void deleteJob(int postId) {
+        for(JobPost jobPost : jobs) {
+            if(jobPost.getPostId() == postId) {
+                jobs.remove(jobPost);
+            }
+
+        }
     }
 }
