@@ -3,18 +3,13 @@ package com.example.spring_boot_rest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.spring_boot_rest.model.JobPost;
 import com.example.spring_boot_rest.service.JobService;
 
 @RestController
+@CrossOrigin
 public class JobRestController {
 
     @Autowired
@@ -28,6 +23,11 @@ public class JobRestController {
     @GetMapping("/jobPost/{postId}")
     public JobPost getJob(@PathVariable int postId) {
         return service.getJob(postId);
+    }
+
+    @GetMapping("jobPosts/keyword/{keyword}")
+    public List<JobPost> searchByKeyword(@PathVariable("keyword") String keyword){
+        return service.search(keyword);
     }
 
     @PostMapping("jobPost")
